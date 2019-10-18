@@ -536,7 +536,7 @@ motionBlurKernel(texture2d<half, access::read>  sourceTexture  [[texture(ALCompu
      下     | 0 0 1 |      | 左 中 右 |
      
      */
-    uint motionLevel = (int)runTime%60;
+    uint motionLevel = (int)(sin(runTime/60.0f*3.1415926)*30)+30;
     
     uint texWidth = destTexture.get_width();
     uint texHeight = destTexture.get_height();
