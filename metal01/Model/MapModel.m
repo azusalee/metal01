@@ -11,8 +11,9 @@
 
 @interface MapModel()
 
-//暂时没有用到y向量，限定只有一层
 @property (nonatomic, assign) vector_float3 mapSize;
+
+@property (nonatomic, assign) BOOL is3D;
 
 //保证有一条路径能连接上起点和终点
 @property (nonatomic, strong) NSArray *safeRouteArray;
@@ -45,6 +46,7 @@
 }
 
 - (void)setup2DMap{
+    self.is3D = NO;
     CFTimeInterval startTime = CACurrentMediaTime();
     NSInteger maxLengthX = self.mapSize.x;
     //NSInteger maxLengthY = self.mapSize.y;
@@ -208,6 +210,7 @@
 }
 
 - (void)setup3DMap{
+    self.is3D = YES;
     CFTimeInterval startTime = CACurrentMediaTime();
     NSInteger maxLengthX = self.mapSize.x;
     NSInteger maxLengthY = self.mapSize.y;

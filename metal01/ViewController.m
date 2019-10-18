@@ -172,6 +172,7 @@
     SettingViewController *controller = [[SettingViewController alloc] init];
     [self presentViewController:controller animated:YES completion:nil];
 }
+
 - (IBAction)changeEffectDidTap:(id)sender {
     static int effectValue = 0;
     
@@ -192,6 +193,10 @@
     NSString *effectString = array[effectValue];
 
     [self.gameRender updateComputeWithName:effectString];
+}
+
+- (IBAction)routeSwitchDidTap:(UISwitch *)sender {
+    self.gameRender.isShowRoute = sender.isOn;
 }
 
 @end

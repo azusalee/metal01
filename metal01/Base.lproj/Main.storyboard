@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,7 +33,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T55-uz-vNT">
-                                <rect key="frame" x="10" y="20" width="187" height="129"/>
+                                <rect key="frame" x="10" y="0.0" width="187" height="129"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hj1-Iv-nB4">
                                         <rect key="frame" x="8" y="8" width="14" height="18"/>
@@ -138,10 +136,23 @@
                                     <action selector="changeEffectDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xx3-Lc-kQ9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="路径" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f1-GF-dFE">
+                                <rect key="frame" x="10" y="154" width="35" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ASS-8T-Z8V">
+                                <rect key="frame" x="60" y="149" width="51" height="31"/>
+                                <connections>
+                                    <action selector="routeSwitchDidTap:" destination="BYZ-38-t0r" eventType="valueChanged" id="RwI-mR-Tbi"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JeW-EL-jzf" secondAttribute="trailing" constant="15" id="1zj-Vt-ve2"/>
+                            <constraint firstItem="ASS-8T-Z8V" firstAttribute="centerY" secondItem="8f1-GF-dFE" secondAttribute="centerY" id="5tu-El-JbX"/>
                             <constraint firstItem="T55-uz-vNT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="6q0-Z8-zrq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tNE-AV-kZW" secondAttribute="trailing" constant="15" id="JR4-3N-x9X"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xNu-Ka-j7j" secondAttribute="trailing" constant="16" id="MKB-mU-pew"/>
@@ -149,10 +160,13 @@
                             <constraint firstItem="T55-uz-vNT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TWb-0L-od3"/>
                             <constraint firstItem="JeW-EL-jzf" firstAttribute="top" secondItem="Gze-5e-Kwg" secondAttribute="bottom" constant="22" id="UPD-u9-dcO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gze-5e-Kwg" secondAttribute="trailing" constant="15" id="c5v-u7-uoe"/>
+                            <constraint firstItem="ASS-8T-Z8V" firstAttribute="leading" secondItem="8f1-GF-dFE" secondAttribute="trailing" constant="15" id="f9O-hF-Ubo"/>
                             <constraint firstItem="Gze-5e-Kwg" firstAttribute="top" secondItem="xNu-Ka-j7j" secondAttribute="bottom" constant="10" id="fDj-iw-8WK"/>
                             <constraint firstItem="xNu-Ka-j7j" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="hiV-Ag-ajL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nlU-pD-yzA" secondAttribute="bottom" constant="15" id="itF-I8-uWg"/>
+                            <constraint firstItem="8f1-GF-dFE" firstAttribute="top" secondItem="T55-uz-vNT" secondAttribute="bottom" constant="25" id="jSH-Md-19p"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tNE-AV-kZW" secondAttribute="bottom" constant="15" id="jiW-Lo-AFj"/>
+                            <constraint firstItem="8f1-GF-dFE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="xVU-ao-3J8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

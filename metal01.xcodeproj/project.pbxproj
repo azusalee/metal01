@@ -17,6 +17,7 @@
 		8C5DE2DA21C796DE00E5323E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5DE2D821C796DE00E5323E /* LaunchScreen.storyboard */; };
 		8C5DE2DD21C796DE00E5323E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DE2DC21C796DE00E5323E /* main.m */; };
 		8C5DE2E421C7A46400E5323E /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DE2E321C7A46400E5323E /* Shader.metal */; };
+		8C6B1C8D235957030082D89C /* RouteShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B1C8C235957030082D89C /* RouteShader.metal */; };
 		8C741746221A98B2002527C4 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C741744221A98B2002527C4 /* SettingViewController.m */; };
 		8C741747221A98B2002527C4 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C741745221A98B2002527C4 /* SettingViewController.xib */; };
 		8C74174A221A9F15002527C4 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C741749221A9F15002527C4 /* SettingManager.m */; };
@@ -45,6 +46,7 @@
 		8C5DE2DB21C796DE00E5323E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C5DE2DC21C796DE00E5323E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C5DE2E321C7A46400E5323E /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
+		8C6B1C8C235957030082D89C /* RouteShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = RouteShader.metal; sourceTree = "<group>"; };
 		8C741743221A98B2002527C4 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		8C741744221A98B2002527C4 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		8C741745221A98B2002527C4 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				8C5DE2E321C7A46400E5323E /* Shader.metal */,
 				8CDA4F5F21E89233000305FB /* SkyboxShader.metal */,
 				8C91CECE2203EEC200A96E75 /* PlaneShader.metal */,
+				8C6B1C8C235957030082D89C /* RouteShader.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				8C91CED522043A0D00A96E75 /* MapModel.m in Sources */,
 				8C8B8CE721D371A200B3035F /* AAPLMathUtilities.m in Sources */,
 				8CDA4F6021E89233000305FB /* SkyboxShader.metal in Sources */,
+				8C6B1C8D235957030082D89C /* RouteShader.metal in Sources */,
 				8C5DE2D221C796DC00E5323E /* ViewController.m in Sources */,
 				8C5DE2DD21C796DE00E5323E /* main.m in Sources */,
 				8C74174A221A9F15002527C4 /* SettingManager.m in Sources */,

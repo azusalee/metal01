@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MazeGameRender : NSObject
 
 @property (nonatomic, weak) id<MazeGameRenderDelegate> delegate;
+@property (nonatomic, assign) BOOL isShowRoute;
 
 - (instancetype)initWithMTKView:(MTKView*)mtkView;
 
@@ -43,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGFloat)getFovyAngle;
 
-
 - (MazeGameInfo*)getGameInfo;
+
 
 @end
 

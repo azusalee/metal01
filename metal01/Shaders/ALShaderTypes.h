@@ -65,6 +65,11 @@ typedef struct
 
 typedef struct
 {
+    vector_float3 position;
+}ALRouteVertex;
+
+typedef struct
+{
     matrix_float4x4 projectionMatrix; // 投影变换
     matrix_float4x4 modelMatrix; // 模型变换
     matrix_float4x4 viewMatrix;

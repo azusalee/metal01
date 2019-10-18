@@ -40,6 +40,7 @@
 @property (nonatomic, strong) id <MTLRenderPipelineState> planePipelineState;
 @property (nonatomic, strong) id<MTLComputePipelineState> computePipelineState;
 
+
 //沒有深度測試的模板
 @property (nonatomic, strong) id <MTLDepthStencilState> dontWriteDepthStencilState;
 //有深度測試的模板
@@ -50,6 +51,11 @@
 @property (nonatomic, strong) id<MTLBuffer> vertices;
 @property (nonatomic, assign) NSUInteger verticesCount;
 @property (nonatomic, strong) id<MTLBuffer> matrixBuffer;
+
+// 路径顶点
+@property (nonatomic, strong) id <MTLRenderPipelineState> routePipelineState;
+@property (nonatomic, strong) id<MTLBuffer> routeVertices;
+@property (nonatomic, assign) NSUInteger routeVerticesCount;
 
 @property (nonatomic, assign) MTLSize groupSize;
 @property (nonatomic, assign) MTLSize groupCount;
@@ -109,6 +115,7 @@
     [self setupDepthStencil];
     [self setupPipeline];
     [self setupTexture];
+    [self setupSafeRouteVertices];
 
     [self setupThreadGroup];
 }
@@ -188,6 +195,36 @@
                                                     options:MTLResourceStorageModeShared]; // 创建顶点缓存
 
     self.verticesCount = sizeof(quadVertices) / sizeof(ALVertex); // 顶点个数
+}
+
+/// 生成路径的顶点数组
+- (void)setupSafeRouteVertices{
+    NSArray *routeArray = [self.game.map safeRouteArray];
+    ALRouteVertex routeVertices[routeArray.count*2-2];
+    BOOL is3D = [self.game.map is3D];
+    NSInteger x, y, z;
+    NSInteger index = 0;
+    for (int i = 0; i < routeArray.count; ++i) {
+        NSInteger routeID = [routeArray[i] integerValue];
+        if (is3D) {
+            z = routeID/10000;
+            y = (routeID/100)%100;
+            x = routeID%100;
+        }else{
+            z = routeID/100;
+            y = 0;
+            x = routeID%100;
+        }
+        if (i != 0 && i != routeArray.count-1) {
+            routeVertices[index++] = (ALRouteVertex){ {  x, y, z }};
+        }
+        routeVertices[index++] = (ALRouteVertex){ {  x, y, z }};
+    }
+    self.routeVertices = [self.mtkView.device newBufferWithBytes:routeVertices
+                                                     length:sizeof(routeVertices)
+                                                    options:MTLResourceStorageModeShared];
+    self.routeVerticesCount = routeArray.count*2-2;
+    
 }
 
 - (void)setupAllVertices{
@@ -355,6 +392,27 @@
         renderPipelineDescriptor.stencilAttachmentPixelFormat = self.mtkView.depthStencilPixelFormat;
 
         _planePipelineState = [self.mtkView.device newRenderPipelineStateWithDescriptor:renderPipelineDescriptor
+                                                                                  error:nil];
+    }
+    
+    // 路径渲染管道
+    {
+        id<MTLLibrary> defaultLibrary = [self.mtkView.device newDefaultLibrary]; // .metal
+
+        id <MTLFunction> vertexFunction = [defaultLibrary newFunctionWithName:@"routeVertexShader"];
+        id <MTLFunction> fragmentFunction = [defaultLibrary newFunctionWithName:@"routeFragmentShader"];
+
+        MTLRenderPipelineDescriptor *renderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
+        renderPipelineDescriptor.label = @"route";
+        //renderPipelineDescriptor.vertexDescriptor = vertexDescriptor;
+        renderPipelineDescriptor.vertexFunction = vertexFunction;
+        renderPipelineDescriptor.fragmentFunction = fragmentFunction;
+        renderPipelineDescriptor.colorAttachments[AAPLRenderTargetLighting].pixelFormat = self.mtkView.colorPixelFormat;
+
+        renderPipelineDescriptor.depthAttachmentPixelFormat = self.mtkView.depthStencilPixelFormat;
+        renderPipelineDescriptor.stencilAttachmentPixelFormat = self.mtkView.depthStencilPixelFormat;
+
+        self.routePipelineState = [self.mtkView.device newRenderPipelineStateWithDescriptor:renderPipelineDescriptor
                                                                                   error:nil];
     }
 
@@ -728,6 +786,19 @@
                                   atIndex:ALVertexInputIndexTransposInverse]; // 设置buffer
 
             [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:self.verticesCount];
+        }
+        
+        // 画出安全路径
+        if (self.isShowRoute) {
+            [renderEncoder setRenderPipelineState:self.routePipelineState];
+            [renderEncoder setDepthStencilState:_dontWriteDepthStencilState];
+            ALMatrix matrix = {self.game.camera.projection_matrix, matrix_make4x4(), viewMatrix};
+            [renderEncoder setVertexBuffer:self.routeVertices offset:0 atIndex:0];
+            [renderEncoder setFragmentBytes:&time length:sizeof(time) atIndex:1];
+            [renderEncoder setVertexBytes:&matrix
+                                   length:sizeof(matrix)
+                                  atIndex:1];
+            [renderEncoder drawPrimitives:MTLPrimitiveTypeLine vertexStart:0 vertexCount:self.routeVerticesCount];
         }
 
         [renderEncoder endEncoding];

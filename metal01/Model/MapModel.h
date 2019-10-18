@@ -26,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (vector_float3)endPosition;
 
+//获取安全路径
+- (NSArray *)safeRouteArray;
+
+//是不是3纬地图(y轴只有1层的就是2D，多层是3D)
+- (BOOL)is3D;
+
 @end
 
 NS_ASSUME_NONNULL_END
