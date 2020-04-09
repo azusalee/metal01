@@ -92,7 +92,7 @@
         //添加视角控制
         UIPanGestureRecognizer *viewPanGesture = [[UIPanGestureRecognizer alloc] init];
         [viewPanGesture addTarget:self action:@selector(viewControlDidPan:)];
-        [self.viewAngleControl addGestureRecognizer:viewPanGesture];
+        [self.mtkView addGestureRecognizer:viewPanGesture];
     }
 
     {
@@ -143,11 +143,15 @@
 
 - (void)viewControlDidPan:(UIPanGestureRecognizer *)gesture{
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        CGPoint tapLocation = [gesture locationInView:gesture.view];
-        self.viewVelocity = CGPointMake((tapLocation.x-50)/2000, -(tapLocation.y-50)/2000);
+        CGPoint trans = [gesture translationInView:gesture.view];
+        self.viewVelocity = CGPointMake((trans.x)/2000, -(trans.y)/2000);
+//        CGPoint tapLocation = [gesture locationInView:gesture.view];
+//        self.viewVelocity = CGPointMake((gesture.x-50)/2000, -(tapLocation.y-50)/2000);
     }else if (gesture.state == UIGestureRecognizerStateChanged) {
-        CGPoint tapLocation = [gesture locationInView:gesture.view];
-        self.viewVelocity = CGPointMake((tapLocation.x-50)/2000, -(tapLocation.y-50)/2000);
+        CGPoint trans = [gesture translationInView:gesture.view];
+        self.viewVelocity = CGPointMake((trans.x)/2000, -(trans.y)/2000);
+//        CGPoint tapLocation = [gesture locationInView:gesture.view];
+//        self.viewVelocity = CGPointMake((tapLocation.x-50)/2000, -(tapLocation.y-50)/2000);
     }else if (gesture.state == UIGestureRecognizerStateEnded) {
         self.viewVelocity = CGPointZero;
     }

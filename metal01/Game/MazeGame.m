@@ -118,10 +118,10 @@
         vector_float3 direct = cameraPosition-position;
         //阈值
         float threshold = 0.70;
-        if (direct.x >= -threshold && direct.x <= threshold && direct.y >= -threshold && direct.y <= threshold && direct.z >= -threshold && direct.z <= threshold) {
+        if (fabs(direct.x) <= threshold && fabs(direct.y) <= threshold && fabs(direct.z) <= threshold) {
             //在正方体内，当作是碰撞了
 
-            //判断是碰撞在哪个面上了(离物体中心最远的面为碰撞面, 各个值的对应面 0:x, 1:y, 2:z)
+            //判断是碰撞在哪个面上了(离物体中心最远的方向为碰撞面, 各个值的对应面 0:x, 1:y, 2:z)
             int colliType = 0;
             if (fabs(direct.z) > fabs(direct.x)) {
                 if (fabs(direct.z) > fabs(direct.y)) {
